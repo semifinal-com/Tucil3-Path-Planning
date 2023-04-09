@@ -20,7 +20,7 @@ func (pq *PrioQueue) Swap(i, j int) {
 func (pq *PrioQueue) Push(newRoute Route) {
 	*pq = append(*pq, &newRoute)
 	canSwap := true
-	for i := len(*pq) - 1; i > 0 && canSwap; i++ {
+	for i := len(*pq) - 1; i > 0 && canSwap; i-- {
 		if pq.Less(i, i-1) {
 			pq.Swap(i, i-1)
 		} else {
