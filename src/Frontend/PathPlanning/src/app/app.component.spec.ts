@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'path-finder'`, () => {
+  it(`should have as title 'PathPlanning'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('path-finder');
+    expect(app.title).toEqual('PathPlanning');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('path-finder app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('PathPlanning app is running!');
   });
 });

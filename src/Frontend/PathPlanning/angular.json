@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "path-finder": {
+    "PathPlanning": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/path-finder",
+            "outputPath": "dist/path-planning",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "path-finder:build:production"
+              "browserTarget": "PathPlanning:build:production"
             },
             "development": {
-              "browserTarget": "path-finder:build:development"
+              "browserTarget": "PathPlanning:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "path-finder:build"
+            "browserTarget": "PathPlanning:build"
           }
         },
         "test": {
@@ -96,6 +96,6 @@
     }
   },
   "cli": {
-    "analytics": "4ff98170-0bb3-4ab8-8ac8-df1180cab0db"
+    "analytics": "e5b5f3d3-fe34-4fd2-8077-37237c374b09"
   }
 }
