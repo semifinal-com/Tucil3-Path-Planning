@@ -1,21 +1,22 @@
 package main
 
-import C "Backend/Controller"
-import "github.com/gin-gonic/gin"
+import (
+	"Backend/Controller"
+	DataType "Backend/Model"
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
 	r := gin.Default()
 
-	userCtrl := C.UserController{}
+	r.Use(cors.Default())
 
-	userRoutes := r.Group("/users")
-	{
-		userRoutes.GET("", userCtrl.GetUsers)
-		userRoutes.POST("", userCtrl.CreateUser)
-		userRoutes.PUT("/:id", userCtrl.UpdateUser)
-		userRoutes.DELETE("/:id", userCtrl.DeleteUser)
-	}
+	var data DataType.Graph
+	var msg DataType.Message
 
+	r.POST("/", Controller.PostHandler(&data, &msg))
+	r.GET("/", Controller.GetHandler(&data, &msg))
 	r.Run()
 }
 

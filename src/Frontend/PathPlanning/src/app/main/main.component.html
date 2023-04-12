@@ -1,1 +1,7 @@
-<a routerLink="/"></a>
+<a routerLink="/main"></a>
+<h1>HALLO</h1>
+<form (submit)="onSubmit()">
+  <label for="numberInput">Enter a number:</label>
+  <input type="number" id="numberInput" (ngModel)="(start)" />
+  <button type="submit">Submit</button>
+</form>
