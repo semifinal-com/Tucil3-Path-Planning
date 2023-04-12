@@ -61,8 +61,8 @@ func main() {
            [1, 1, 0, 0, 0],
            [1, 1, 1, 0, 0],
            [0, 1, 1, 1, 0],
-           [0, 0, 1, 1, 1],
-           [0, 0, 0, 1, 1]
+           [0, 0, 1, 1, 0],
+           [0, 0, 0, 0, 1]
        ]
    }`)
 	var listA []DataType.Node
@@ -79,11 +79,18 @@ func main() {
 	//res := DataType.UCS(&graph, &listA[0], &listA[4])
 	//g *Graph, From, To *Node, nodes []Node
 	res := DataType.Astar(&graph, &listA[0], &listA[4], listA)
+	resUcs := DataType.UCS(&graph, &listA[0], &listA[4])
 
-	fmt.Println("\nRESULT")
+	fmt.Println("\nRESULT A Star")
 	for _, node := range res {
 		node.PrintNode()
 	}
+
+	fmt.Println("\nRESULT UCS")
+	for _, node := range resUcs {
+		node.PrintNode()
+	}
+
 
 	//r := gin.Default()
 	//r.GET("/ping", func(c *gin.Context) {
