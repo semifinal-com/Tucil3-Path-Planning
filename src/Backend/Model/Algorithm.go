@@ -9,6 +9,7 @@ func UCS(g *Graph, From, To *Node) ([]*Node, float64) {
 		if currNode == To {
 			return currRoute.Nodes, currRoute.Cost
 		}
+		// Bypass if current node has been visited before to avoid loop
 		if visit[currNode] {
 			continue
 		}
@@ -27,10 +28,19 @@ func UCS(g *Graph, From, To *Node) ([]*Node, float64) {
 func Astar(g *Graph, From, To *Node, nodes []Node) ([]*Node, float64) {
 	heur := CreateHeuristic(nodes, To)
 	queue := PrioQueue{&Route{Nodes: []*Node{From}, Cost: heur[From]}}
+	visited := make(map[*Node]bool)
 
 	for len(queue) > 0 {
 		currRoute := queue.Pop()
 		currNode := currRoute.Nodes[len(currRoute.Nodes)-1]
+
+		// Check if current node has been visited before
+		if visited[currNode] {
+			continue
+		}
+
+		visited[currNode] = true
+
 		if currNode == To {
 			return currRoute.Nodes, currRoute.Cost
 		}
@@ -49,7 +59,8 @@ func Astar(g *Graph, From, To *Node, nodes []Node) ([]*Node, float64) {
 func CreateHeuristic(nodes []Node, To *Node) map[*Node]float64 {
 	heurist := make(map[*Node]float64)
 	for _, node := range nodes {
-		heurist[&node] = node.Distance(*To)
+		// Using haversine calculation to increase accuracy
+		heurist[&node] = node.DistanceHaversine(*To)
 	}
 	return heurist
 }

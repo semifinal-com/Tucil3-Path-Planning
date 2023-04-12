@@ -67,10 +67,19 @@ export class MainComponent implements OnInit {
     marker2 = new Feature({
       geometry: new Point(fromLonLat([107.618108, -6.89218])),
     });
-    if (markerSource) {
-      markerSource.addFeature(marker1);
-      markerSource.addFeature(marker2);
-    }
+
+    // marker.setStyle(iconStyle);
+    // this.markers.push(marker);
+
+    // this.vectorSource.addFeature(marker);
+
+    // // If this is the second marker clicked, start adding a line between them
+    // if (this.markers.length === 2 ) {
+    //   this.isAddingLine = true;
+    //   if(this.markers[0] instanceof SimpleGeometry){
+    //     // disii bang ini padahal tipe udah geometry
+    //    // this.startCoord = this.markers[0].getGeometry().getCoordinates();
+    //   }
 
     // add line between markers
     const lineSource = this.lineLayer.getSource();
