@@ -66,7 +66,7 @@ func (g *Graph) CreateGraph(nodes []Node, mat [][]int) {
 	for i := 0; i < len(mat); i++ {
 		for j := 0; j < len(mat[0]); j++ {
 			if mat[i][j] == 1 {
-				g.Links[g.Nodes[i]] = append(g.Links[g.Nodes[i]], &Link{To: g.Nodes[j], Dist: nodes[i].Distance(nodes[j])})
+				g.Links[g.Nodes[i]] = append(g.Links[g.Nodes[i]], &Link{To: g.Nodes[j], Dist: nodes[i].DistanceHaversine(nodes[j])})
 			}
 		}
 	}
