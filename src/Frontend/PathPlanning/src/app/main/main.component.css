@@ -1,4 +1,28 @@
-.card {
+/* Sidebar */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 20vw;
+  background-color: red;
+  padding: 20px;
+}
+
+/* Mainbar */
+#mainbar {
+  margin-left: 20vw;
+  height: 100vh;
+  padding: 20px;
+  background-color: aqua;
+}
+
+.map {
+  width: 100%;
+  height: 60vh;
+}
+
+/* .card {
   background-color: #fff;
 }
 
@@ -12,16 +36,18 @@
   border-color: #0062cc;
 }
 
-.btn-primary:focus, .btn-primary.focus {
+.btn-primary:focus,
+.btn-primary.focus {
   box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
 }
 
-.btn-primary.disabled, .btn-primary:disabled {
+.btn-primary.disabled,
+.btn-primary:disabled {
   background-color: #007bff;
   border-color: #007bff;
 }
 
-.custom-file-input:focus~.custom-file-label {
+.custom-file-input:focus ~ .custom-file-label {
   border-color: #007bff;
   box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
 }
@@ -56,7 +82,7 @@
 }
 
 .marker {
-  background-image: url('https://openlayers.org/en/latest/examples/data/icon.png');
+  background-image: url("https://openlayers.org/en/latest/examples/data/icon.png");
   background-repeat: no-repeat;
   background-size: 24px 24px;
   background-position: center center;
@@ -67,6 +93,6 @@
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
 }
 
-body {
+/* body {
   background-color: #ef8686;
-}
+} */

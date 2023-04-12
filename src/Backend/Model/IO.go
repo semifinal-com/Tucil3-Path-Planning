@@ -1,6 +1,8 @@
 package DataType
 
 type Message struct {
-	route    string
-	distance float64
+	Route    string
+	Distance float64
+	Nodes    []*Node
+	Status   bool
 }
