@@ -89,7 +89,7 @@ export class MainComponent implements OnInit {
       this.isAddingLine = true;
       if(this.markers[0] instanceof SimpleGeometry){
         // disii bang ini padahal tipe udah geometry
-        this.startCoord = this.markers[0].getGeometry().getCoordinates();
+       // this.startCoord = this.markers[0].getGeometry().getCoordinates();
       }
 
     }
