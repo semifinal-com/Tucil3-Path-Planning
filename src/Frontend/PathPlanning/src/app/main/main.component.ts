@@ -47,7 +47,7 @@ export class MainComponent implements OnInit {
         }),
       ],
       view: new View({
-        center: fromLonLat([6, 10]),
+        center: fromLonLat([0, 0]),
         zoom: 0,
       }),
     });
@@ -199,7 +199,7 @@ export class MainComponent implements OnInit {
     }
   }
 
-  createSolution(nodes: any, size: number) {
+  createSolution() {
     for (let i = 1; i < this.Solution.result.length; i++) {
       console.log(this.Solution.result);
 
@@ -221,21 +221,38 @@ export class MainComponent implements OnInit {
 
   async showRoute() {
     console.log(this.Solution);
-    await this.createSolution(this.Solution.result, this.Solution.numstep);
+    await this.createSolution();
   }
 
   async onEnter(idStart: string, idDest: string) {
     var dest = parseInt(idDest);
     var strt = parseInt(idStart);
 
-    // try {
-    //   if (this.MessageJSON.nodes.length < 8) {
-    //     throw new Error('Jumlah Node kurang dari 8');
-    //   }
-    // } catch (error: any) {
-    //   alert(error.message);
-    //   return;
-    // }
+    try {
+      if (this.MessageJSON.nodes.length < 8) {
+        throw new Error('Jumlah Node kurang dari 8');
+      }
+      if (
+        strt >= this.MessageJSON.nodes.length ||
+        dest >= this.MessageJSON.nodes.length
+      ) {
+        throw new Error(
+          'Input Titik Asal atau Tujuan Tidak Ditemukan, Cek Input File atau Titik kembali'
+        );
+      }
+      if (strt < 0 || dest < 0) {
+        throw new Error('Tidak Ada Id Negatif');
+      }
+      if (this.Algorithm == '') {
+        throw new Error('Algoritma belum dipilih');
+      }
+    } catch (error: any) {
+      alert(error.message);
+      setTimeout(() => {
+        location.reload();
+      }, 1000); // menunggu 5 detik sebelum merefresh halaman
+      return;
+    }
     // const size: number = this.MessageJSON.node.length;
     await this.createGraph(
       this.MessageJSON.mat,

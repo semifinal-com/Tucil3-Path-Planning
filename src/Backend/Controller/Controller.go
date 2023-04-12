@@ -2,7 +2,6 @@ package Controller
 
 import (
 	DataType "Backend/Model"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"net/http"
@@ -19,25 +18,32 @@ func PostHandler(data *DataType.Graph, msg *DataType.Message) gin.HandlerFunc {
 			g.CreateGraph(nodes, matrix)
 
 			if algo == "UCS" {
-				fmt.Println("UCS")
 				res, dist := DataType.UCS(&g, &nodes[from], &nodes[to])
 				(*msg).Nodes = res
 				(*msg).Distance = dist
-				(*msg).Route += res[0].Name
-				for i := 1; i < len(res); i++ {
-					(*msg).Route += " - " + res[i].Name
+				if len(res) > 0 {
+					(*msg).Route += res[0].Name
+					if len(res) > 1 {
+						for i := 1; i < len(res); i++ {
+							(*msg).Route += " - " + res[i].Name
+						}
+					}
 				}
 
 			}
 			if algo == "A*" {
-				fmt.Println("A*")
 				res, dist := DataType.Astar(&g, &nodes[from], &nodes[to], nodes)
 				(*msg).Nodes = res
 				(*msg).Distance = dist
-				(*msg).Route += res[0].Name
-				for i := 1; i < len(res); i++ {
-					(*msg).Route += " - " + res[i].Name
+				if len(res) > 0 {
+					(*msg).Route += res[0].Name
+					if len(res) > 1 {
+						for i := 1; i < len(res); i++ {
+							(*msg).Route += " - " + res[i].Name
+						}
+					}
 				}
+
 			}
 			(*msg).Status = true
 			if err != nil {

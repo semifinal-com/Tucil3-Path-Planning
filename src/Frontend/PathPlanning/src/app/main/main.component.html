@@ -12,7 +12,7 @@
 />
 <div id="sidebar">
   <div class="container">
-    <h1 class="text-center mb-4">Sidebar</h1>
+    <h2 class="text-center mb-4">INPUT</h2>
     <div class="mb-1">
       <label class=""><h5>Input File</h5></label>
       <input type="file" accept=".json" (change)="onFileSelected($event)" />
@@ -59,22 +59,34 @@
     <button class="btn btn-primary" (click)="onEnter(Asal.value, Tujuan.value)">
       Submit
     </button>
-    <button class="btn btn-primary" (click)="showRoute()">Route</button>
+    <div class="form-text mb-3">
+      Jika inputan sudah lengkap, Submit untuk mendapatkan rute dan gambar graf
+      pada peta
+    </div>
+    <div class="mb-1">
+      <button class="btn btn-primary" (click)="showRoute()">Route</button>
+    </div>
+    <div class="form-text">
+      Klik ketika gambar graf sudah terlihat, untuk melihat gambaran rute
+      perjalanan anda
+    </div>
   </div>
 </div>
 
 <!-- Mainbar -->
 <div id="mainbar">
   <div class="container">
-    <h5 class="text-center mb-4">Mainbar</h5>
+    <h2 class="mb-3">
+      Implementasi Algoritma UCS dan A* untuk Menentukan Lintasan Terpendek
+    </h2>
     <div class="solutionContainer">
       <div id="map" class="map"></div>
     </div>
     <div class="result">
-      <div class="route">
+      <div class="route mt-4">
         <h5>Rute : {{ RouteView }}</h5>
       </div>
-      <div class="dist">
+      <div class="dist mt-5">
         <h5>Jarak Tempuh : {{ RouteDistance }} meter</h5>
       </div>
     </div>

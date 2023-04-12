@@ -34,17 +34,6 @@ func Json2Nodes(jsonData []byte, nodes *[]Node) ([][]int, int, int, string) {
 		panic(err)
 	}
 
-	for _, no := range parse.Nodes {
-		fmt.Printf("%s , (%f, %f)\n", no.Name, no.Coor[0], no.Coor[1])
-	}
-	fmt.Printf("From : %d , To : %d\n", parse.From, parse.To)
-	for _, i := range parse.AdjMat {
-		for _, j := range i {
-			fmt.Printf("%d ", j)
-		}
-		fmt.Println("")
-	}
-
 	*nodes = make([]Node, len(parse.Nodes))
 	for i := 0; i < len(*nodes); i++ {
 		(*nodes)[i] = Node{Id: parse.Nodes[i].ID, Name: parse.Nodes[i].Name, Coor: struct {
