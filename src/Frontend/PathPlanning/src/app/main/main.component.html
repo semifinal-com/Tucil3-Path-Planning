@@ -1,1 +1,24 @@
-<a routerLink="/"></a>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="jsonFileInput">Upload JSON File:</label>
+        <input type="file" class="form-control-file" id="jsonFileInput">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="algorithmSelect">Select Algorithm:</label>
+        <select class="form-control" id="algorithmSelect">
+          <option value="ucs">UCS</option>
+          <option value="aStar">A*</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <div id="map" style="width: 100%; height: 500px;"></div>
+    </div>
+  </div>
+</div>
