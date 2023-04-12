@@ -6,13 +6,12 @@ import (
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"net/http"
-	"strconv"
 )
 
 func PostHandler(data *DataType.Graph, msg *DataType.Message) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if c.Request.Method == "POST" {
-			(*msg).Status = false
+			msg.SetDefault()
 			requestBody, err := ioutil.ReadAll(c.Request.Body)
 			var nodes []DataType.Node
 			matrix, from, to, algo := DataType.Json2Nodes(requestBody, &nodes)
@@ -20,23 +19,24 @@ func PostHandler(data *DataType.Graph, msg *DataType.Message) gin.HandlerFunc {
 			g.CreateGraph(nodes, matrix)
 
 			if algo == "UCS" {
+				fmt.Println("UCS")
 				res, dist := DataType.UCS(&g, &nodes[from], &nodes[to])
 				(*msg).Nodes = res
 				(*msg).Distance = dist
-				fmt.Printf("Distance : %f\n", dist)
-				for _, node := range res {
-					(*msg).Route += " - " + strconv.Itoa(node.Id)
-					node.PrintNode()
+				(*msg).Route += res[0].Name
+				for i := 1; i < len(res); i++ {
+					(*msg).Route += " - " + res[i].Name
 				}
-				fmt.Println((*msg).Route)
+
 			}
-			if algo == "A" {
+			if algo == "A*" {
+				fmt.Println("A*")
 				res, dist := DataType.Astar(&g, &nodes[from], &nodes[to], nodes)
+				(*msg).Nodes = res
 				(*msg).Distance = dist
-				fmt.Printf("Distance : %f", dist)
-				for _, node := range res {
-					(*msg).Route += " - " + node.Name
-					node.PrintNode()
+				(*msg).Route += res[0].Name
+				for i := 1; i < len(res); i++ {
+					(*msg).Route += " - " + res[i].Name
 				}
 			}
 			(*msg).Status = true
@@ -65,6 +65,7 @@ func GetHandler(data *DataType.Graph, msg *DataType.Message) gin.HandlerFunc {
 				"routestr": msg.Route,
 				"result":   msg.Nodes,
 				"distance": msg.Distance,
+				"numstep":  len(msg.Nodes),
 			})
 		}
 	}

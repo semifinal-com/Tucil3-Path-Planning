@@ -59,6 +59,7 @@
     <button class="btn btn-primary" (click)="onEnter(Asal.value, Tujuan.value)">
       Submit
     </button>
+    <button class="btn btn-primary" (click)="showRoute()">Route</button>
   </div>
 </div>
 
@@ -71,10 +72,10 @@
     </div>
     <div class="result">
       <div class="route">
-        <h5>Rute : {{ rute }}</h5>
+        <h5>Rute : {{ RouteView }}</h5>
       </div>
       <div class="dist">
-        <h5>Jarak Tempuh : {{ rute }} m</h5>
+        <h5>Jarak Tempuh : {{ RouteDistance }} m</h5>
       </div>
     </div>
   </div>
