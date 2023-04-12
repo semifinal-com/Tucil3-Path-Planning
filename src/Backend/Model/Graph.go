@@ -16,7 +16,7 @@ type Graph struct {
 }
 
 // READ FILE
-func Json2Nodes(jsonData []byte, nodes *[]Node) [][]int {
+func Json2Nodes(jsonData []byte, nodes *[]Node) ([][]int, int, int, string) {
 	var parse struct {
 		Nodes []*struct {
 			ID   int        `json::"id"`
@@ -24,6 +24,9 @@ func Json2Nodes(jsonData []byte, nodes *[]Node) [][]int {
 			Coor [2]float64 `json:"coor"`
 		} `json:"nodes"`
 		AdjMat [][]int `json:"mat"`
+		From   int     `json:"from"`
+		To     int     `json:"to"`
+		Algo   string  `json:"algo"`
 	}
 
 	err := json.Unmarshal(jsonData, &parse)
@@ -34,6 +37,13 @@ func Json2Nodes(jsonData []byte, nodes *[]Node) [][]int {
 	for _, no := range parse.Nodes {
 		fmt.Printf("%s , (%f, %f)\n", no.Name, no.Coor[0], no.Coor[1])
 	}
+	fmt.Printf("From : %d , To : %d\n", parse.From, parse.To)
+	for _, i := range parse.AdjMat {
+		for _, j := range i {
+			fmt.Printf("%d ", j)
+		}
+		fmt.Println("")
+	}
 
 	*nodes = make([]Node, len(parse.Nodes))
 	for i := 0; i < len(*nodes); i++ {
@@ -42,7 +52,7 @@ func Json2Nodes(jsonData []byte, nodes *[]Node) [][]int {
 			Y float64
 		}{Y: parse.Nodes[i].Coor[0], X: parse.Nodes[i].Coor[1]}}
 	}
-	return parse.AdjMat
+	return parse.AdjMat, parse.From, parse.To, parse.Algo
 }
 
 func (g *Graph) CreateGraph(nodes []Node, mat [][]int) {

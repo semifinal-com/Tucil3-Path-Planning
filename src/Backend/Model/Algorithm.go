@@ -1,13 +1,13 @@
 package DataType
 
-func UCS(g *Graph, From, To *Node) []*Node {
+func UCS(g *Graph, From, To *Node) ([]*Node, float64) {
 	queue := PrioQueue{&Route{Nodes: []*Node{From}}}
 	visit := make(map[*Node]bool)
 	for len(queue) > 0 {
 		currRoute := queue.Pop()
 		currNode := currRoute.Nodes[len(currRoute.Nodes)-1]
 		if currNode == To {
-			return currRoute.Nodes
+			return currRoute.Nodes, currRoute.Cost
 		}
 		// Bypass if current node has been visited before to avoid loop
 		if visit[currNode] {
@@ -22,10 +22,10 @@ func UCS(g *Graph, From, To *Node) []*Node {
 			queue.Push(*newRoute)
 		}
 	}
-	return nil
+	return nil, -1
 }
 
-func Astar(g *Graph, From, To *Node, nodes []Node) []*Node {
+func Astar(g *Graph, From, To *Node, nodes []Node) ([]*Node, float64) {
 	heur := CreateHeuristic(nodes, To)
 	queue := PrioQueue{&Route{Nodes: []*Node{From}, Cost: heur[From]}}
 	visited := make(map[*Node]bool)
@@ -42,7 +42,7 @@ func Astar(g *Graph, From, To *Node, nodes []Node) []*Node {
 		visited[currNode] = true
 
 		if currNode == To {
-			return currRoute.Nodes
+			return currRoute.Nodes, currRoute.Cost
 		}
 		for _, link := range g.Links[currNode] {
 			newRoute := &Route{Cost: currRoute.Cost + link.Dist}
@@ -53,7 +53,7 @@ func Astar(g *Graph, From, To *Node, nodes []Node) []*Node {
 			queue.Push(*newRoute)
 		}
 	}
-	return nil
+	return nil, -1
 }
 
 func CreateHeuristic(nodes []Node, To *Node) map[*Node]float64 {
