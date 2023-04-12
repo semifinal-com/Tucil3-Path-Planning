@@ -4,13 +4,69 @@ Tugas Kecil 3 IF2211 Strategi Algoritma Semester II Tahun 2022/2023 Implementasi
 
 ## Daftar Isi
 
--   [Deskripsi Singkat Program](#implementasi-algoritma-bfs-dan-dfs-dalam-menyelesaikan-persoalan-maze-treasure-hunt)
+-   [Deskripsi Program](#deskripsi-program)
 -   [Struktur Program](#struktur-program)
 -   [Requirement Program](#requirement-program)
 -   [Setup Program](#setup-program)
 -   [Menjalankan Program](#menjalankan-program)
 -   [Struktur Input File](#struktur-imput-file)
 -   [Authors](#authors)
+
+## Deskripsi Program
+
+Program Tucil3-Path-Planning merupakan program Implementasi Implementasi Algoritma UCS dan A\* untuk Menentukan Lintasan Terpendek. Program akan menentukan lintasan terpendek berdasarkan peta Google Map jalan-jalan di kota Bandung. Dari ruas-ruas jalan di peta dibentuk graf. f. Simpul menyatakan persilangan jalan (simpang 3, 4 atau 5) atau ujung jalan. Asumsikan jalan dapat dilalui dari dua arah. Bobot graf menyatakan jarak (m atau km) antar simpul. Jarak antar dua simpul dapat dihitung dari koordinat kedua simpul menggunakan rumus jarak Euclidean (berdasarkan koordinat). Program ini berbasis Website, program terdiri dari Backend dengan Framework Gin dengan Bahasa Pemrogramman Go (Golang). Frontend dengan Framework Angular JS dengan bahasa pemrograman TypeScript dan bantuan API OpenLayers.
+
+## Struktur Program
+
+    .
+    │   README.md
+    │
+    │
+    ├───src
+    │   ├───Backend
+    │   │   │   go.mod
+    │   │   │   go.sum
+    │   │   │   main.go
+    │   │   │
+    │   │   ├───Controller
+    │   │   │       Controller.go
+    │   │   │
+    │   │   └───Model
+    │   │           Algorithm.go
+    │   │           Graph.go
+    │   │           IO.go
+    │   │           Node.go
+    │   │           PrioQueue.go
+    │   │
+    │   └───Frontend
+    │       └───PathPlanning
+    │           │
+    │           └───src
+    │               │   favicon.ico
+    │               │   index.html
+    │               │   main.ts
+    │               │   styles.css
+    │               │
+    │               ├───app
+    │                   │   app-routing.module.ts
+    │                   │   app.component.css
+    │                   │   app.component.html
+    │                   │   app.component.spec.ts
+    │                   │   app.component.ts
+    │                   │   app.module.ts
+    │                   │
+    │                   └───main
+    │                           main.component.css
+    │                           main.component.html
+    │                           main.component.spec.ts
+    │                           main.component.ts
+    │
+    └───test
+            Alun-Alun.json
+            Buahbatu.json
+            invalidInput.json
+            sekitarDago.json
+            UGMmaszeh.json
 
 ## Requirement Program
 
