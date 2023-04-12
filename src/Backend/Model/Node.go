@@ -19,16 +19,16 @@ func (n Node) Distance(o Node) float64 {
 }
 
 func (n Node) DistanceHaversine(o Node) float64 {
-	lat1 := n.Coor.X
-	lat2 := o.Coor.X
-	lon1 := n.Coor.Y
-	lon2 := o.Coor.Y
+	lat1 := n.Coor.Y
+	lat2 := o.Coor.Y
+	lon1 := n.Coor.X
+	lon2 := o.Coor.X
 
 	rad := func(x float64) float64 {
 		return x * math.Pi / 180
 	}
 
-	var R float64 = 6371 // km
+	var R float64 = 6371000 // km
 	dLat := rad(lat2 - lat1)
 	dLon := rad(lon2 - lon1)
 	lat1 = rad(lat1)

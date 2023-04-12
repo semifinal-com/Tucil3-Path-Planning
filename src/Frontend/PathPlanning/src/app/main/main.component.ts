@@ -47,8 +47,8 @@ export class MainComponent implements OnInit {
         }),
       ],
       view: new View({
-        center: fromLonLat([2, 2]),
-        zoom: 7,
+        center: fromLonLat([6, 10]),
+        zoom: 0,
       }),
     });
   }
@@ -66,12 +66,12 @@ export class MainComponent implements OnInit {
 
     // add first marker
     marker1 = new Feature({
-      geometry: new Point(fromLonLat([coor1[0], coor1[1]])),
+      geometry: new Point(fromLonLat([coor1[1], coor1[0]])),
       nama: name1,
     });
     // add second marker
     marker2 = new Feature({
-      geometry: new Point(fromLonLat([coor2[0], coor2[1]])),
+      geometry: new Point(fromLonLat([coor2[1], coor2[0]])),
       nama: name2,
     });
 
@@ -91,7 +91,7 @@ export class MainComponent implements OnInit {
           (<Point>marker1.getGeometry()).getCoordinates(),
           (<Point>marker2.getGeometry()).getCoordinates(),
         ]),
-        nama: 'dist',
+        nama: calculateDistance(coor1[1], coor1[0], coor2[1], coor2[0]),
         warna: color,
       });
 
@@ -148,40 +148,6 @@ export class MainComponent implements OnInit {
 
     this.map.addLayer(this.markerLayer);
   }
-  // private initLineLayer(): void {
-  //   const lineSource = new Vector({
-  //     features: [],
-  //   });
-
-  //   const lineStyle = new Style({
-  //     stroke: new Stroke({
-  //       color: function (feature: Feature) {
-  //         return feature.get('warna'); // mengakses nilai warna dari Feature
-  //       },
-  //       width: 5,
-  //     }),
-  //     text: new Text({
-  //       text: '',
-  //       font: '12px sans-serif',
-  //       fill: new Fill({ color: 'black' }),
-  //       stroke: new Stroke({
-  //         color: 'white',
-  //         width: 2,
-  //       }),
-  //       offsetY: -15, // mengatur posisi teks ke atas
-  //     }),
-  //   });
-
-  //   this.lineLayer = new VectorLayer({
-  //     source: lineSource,
-  //     style: function (feature) {
-  //       lineStyle.getText().setText(feature.get('nama'));
-  //       return lineStyle;
-  //     },
-  //   });
-
-  //   this.map.addLayer(this.lineLayer);
-  // }
 
   private initLineLayer(): void {
     const lineSource = new Vector({
@@ -234,7 +200,7 @@ export class MainComponent implements OnInit {
   }
 
   createSolution(nodes: any, size: number) {
-    for (let i = 1; i < 4; i++) {
+    for (let i = 1; i < this.Solution.result.length; i++) {
       console.log(this.Solution.result);
 
       var a = [this.Solution.result[i].Coor.Y, this.Solution.result[i].Coor.X];
@@ -297,4 +263,28 @@ export class MainComponent implements OnInit {
         this.Solution = data;
       });
   }
+}
+
+function calculateDistance(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number
+) {
+  const R = 6371e3; // radius of the earth in meters
+  const phi1 = (lat1 * Math.PI) / 180;
+  const phi2 = (lat2 * Math.PI) / 180;
+  const deltaPhi = ((lat2 - lat1) * Math.PI) / 180;
+  const deltaLambda = ((lon2 - lon1) * Math.PI) / 180;
+
+  const a =
+    Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2) +
+    Math.cos(phi1) *
+      Math.cos(phi2) *
+      Math.sin(deltaLambda / 2) *
+      Math.sin(deltaLambda / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  const d = R * c;
+  return d.toFixed(2) + ' meters';
 }
