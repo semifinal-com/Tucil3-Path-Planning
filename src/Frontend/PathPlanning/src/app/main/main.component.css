@@ -7,6 +7,8 @@
   width: 20vw;
   background-color: #a5d7e8;
   padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* Mainbar */
@@ -16,11 +18,12 @@
   padding: 20px;
   background-color: #0b2447;
   color: aliceblue;
+  overflow: auto;
 }
 
 .map {
-  width: 100%;
-  height: 60vh;
+  aspect-ratio: 2 / 1;
+  width: 150vh;
 }
 
 .solutionContainer {

@@ -23,7 +23,7 @@ export class MainComponent implements OnInit {
   MessageJSON: any = null;
   RouteView: string = 'NaN';
   RouteDistance: string = 'NaN';
-  Algorithm: string = '';
+  Algorithm: string = 'UCS';
   Solution: any = null;
 
   map: Map = new Map({});
@@ -47,8 +47,8 @@ export class MainComponent implements OnInit {
         }),
       ],
       view: new View({
-        center: fromLonLat([0, 0]),
-        zoom: 0,
+        center: fromLonLat([107.6107, -6.8907]),
+        zoom: 15,
       }),
     });
   }
