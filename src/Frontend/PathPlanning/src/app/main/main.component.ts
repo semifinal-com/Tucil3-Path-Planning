@@ -265,11 +265,11 @@ export class MainComponent implements OnInit {
     this.MessageJSON.algo = this.Algorithm;
 
     await this.http
-      .post('http://localhost:8080/', this.MessageJSON)
+      .post('https://pathplening-api.fly.dev/', this.MessageJSON)
       .toPromise();
 
     await this.http
-      .get('http://localhost:8080/', { responseType: 'json' })
+      .get('https://pathplening-api.fly.dev/', { responseType: 'json' })
       .subscribe((data: any) => {
         console.log(data);
         this.RouteDistance = '';
